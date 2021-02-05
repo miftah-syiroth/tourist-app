@@ -6,10 +6,10 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex flex-row gap-6">
                         
-                    {{-- form pembuatan artikel --}}
+                    {{-- form edit artikel --}}
                     <div class="w-3/4 rounded-md bg-gray-200 p-4">
                         <h1 class="font-bold text-lg">Form Pembuatan Artikel</h1>
-                        <form action="/dashboard/articles/{{ $article->id }}" method="post" enctype="multipart/form-data" class="mt-4">
+                        <form action="/dashboard/articles/{{ $article->slug }}" method="post" enctype="multipart/form-data" class="mt-4">
                             @method('PATCH')
                             @csrf
                             <label class="block">
@@ -21,10 +21,10 @@
                             </label>
                             <label class="block">
                                 <span class="text-gray-700">pilih kategori artikel</span>
-                                <select name="categories[]" id="categories" class="@error('categories') is-invalid @enderror form-multiselect block w-full mt-1" multiple>
+                                <select name="category" id="" class="@error('categories') is-invalid @enderror block w-full mt-1">
                                     @foreach ($categories as $category)
-                                    <option value={{ $category->id }}>{{ $category->category }}</option>
-                                @endforeach
+                                        <option {{ $category->id == $article->category_id ? 'selected' : '' }} value={{ $category->id }}>{{ $category->category }}</option>
+                                    @endforeach 
                                 </select>
                                 @error('categories')
                                     <div class="text-red-600 font-medium">{{ $message }}</div>
@@ -37,42 +37,24 @@
                                 <div class="text-red-600 font-medium">{{ $message }}</div>
                                 @enderror
                             </label>
-                            <div class="mt-4">
-                                <label class="inline-flex">
-                                    <span class="text-gray-700">Gambar 1</span>
-                                    <input type="file" name="images[]" id="image1" class="@error('images.0') is-invalid @enderror">
-                                    @error('images.0')
-                                    <div class="text-red-600 font-medium">{{ $message }}</div>
-                                    @enderror
-                                </label>
-                                <label class="inline-flex">
-                                    <span class="text-gray-700">Gambar 2</span>
-                                    <input type="file" name="images[]" id="image2" class="@error('images.1') is-invalid @enderror">
-                                    @error('images.1')
-                                    <div class="text-red-600 font-medium">{{ $message }}</div>
-                                    @enderror
-                                </label>
-                                <label class="inline-flex">
-                                    <span class="text-gray-700">Gambar 3</span>
-                                    <input type="file" name="images[]" id="image3" class="@error('images.2') is-invalid @enderror">
-                                    @error('images.2')
-                                    <div class="text-red-600 font-medium">{{ $message }}</div>
-                                    @enderror
-                                </label>
-                                <label class="inline-flex">
-                                    <span class="text-gray-700">Gambar 4</span>
-                                    <input type="file" name="images[]" id="image4" class="@error('images.3') is-invalid @enderror">
-                                    @error('images.3')
-                                    <div class="text-red-600 font-medium">{{ $message }}</div>
-                                    @enderror
-                                </label>
-                                <label class="inline-flex">
-                                    <span class="text-gray-700">Gambar 5</span>
-                                    <input type="file" name="images[]" id="image5" class="@error('images.4') is-invalid @enderror">
-                                    @error('images.4')
-                                    <div class="text-red-600 font-medium">{{ $message }}</div>
-                                    @enderror
-                                </label>
+
+                            {{-- untuk gambar --}}
+                            <div class="mt-4 flex flex-col">
+                                
+                                @foreach ($article->images as $key => $image)
+                                <div class="py-4">
+                                    <a href="">
+                                        <img class="object-contain h-48 w-full" src=" {{ url('/storage/images/article/5EYHekHecqeql2QwcZTNp5xjQIyeYYPVz0KIjxxg.png') }}" alt="">
+                                    </a>
+                                    <label class="inline-flex">
+                                        <span class="text-gray-700">Gambar {{$key+1}}</span>
+                                        <input type="file" name="images[]" id="image1" class="@error('images.0') is-invalid @enderror">
+                                        @error('images.0')
+                                        <div class="text-red-600 font-medium">{{ $message }}</div>
+                                        @enderror
+                                    </label>
+                                </div>
+                                @endforeach
                             </div>
                             
                             

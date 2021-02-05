@@ -41,8 +41,7 @@ class ArticleController extends Controller
         /** buat validasi untuk setiap input form */
         $attribute = $request->validate([
             'title' => 'required|string',
-            'categories' => 'required',
-            'categories' => 'array|required',
+            'category' => 'required',
             'content' => 'required|string',
             'images.*' => 'image',
             'images.0' => 'required',
@@ -50,17 +49,12 @@ class ArticleController extends Controller
             'images.2' => 'required',
         ]);
 
+
         /** buat index slug pada array attribut dari title */
         $attribute['slug'] = Str::of($attribute['title'])->slug('-');
 
-        /** masukkan categoru default atau kategori dengan id 5 */
-        array_push($attribute['categories'], '5');
-
         /**input ke dalam database*/
         $article = Auth::user()->articles()->create($attribute);
-
-        /**simpan ke dalam tabel kategori */
-        $article->categories()->attach($attribute['categories']);
 
         /** simpan semua input gambar ke dalam storage dan ambil path ke dalam array images */
         foreach ($attribute['images'] as $key => $image) {
@@ -74,7 +68,7 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        return abort(404);
+        return abort(403);
         /** id 5 itu default kategori untuk semua artikel, tidak dipilih/dihapus/diedit */
         $categories = Category::where('id', '!=', '5')->get();
 
@@ -86,6 +80,10 @@ class ArticleController extends Controller
 
     public function update(Request $request, Article $article)
     {
+        dump($request->images);
+        die;
+        exit;
+
         /** buat validasi untuk setiap input form */
         $attribute = $request->validate([
             'title' => 'required|string',
@@ -122,7 +120,6 @@ class ArticleController extends Controller
 
     /**
      * 1. hapus dulu file di storage
-     * 2. hapus kategori ditabel antara. untuk siap2 barangkali onDelete cascade ga berfungsi
      */
     public function destroy(Article $article)
     {
@@ -132,8 +129,6 @@ class ArticleController extends Controller
             Storage::delete($image->image);
         }
 
-        /**2 */
-        $article->categories()->detach();
         $article->delete();
 
         return redirect()->back();

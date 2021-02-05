@@ -12,6 +12,7 @@ class Recreation extends Model
     protected $table = "recreations";
     protected $fillable = [
         'name',
+        'slug',
         'start_day',
         'finins_day',
         'price',

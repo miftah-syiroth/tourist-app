@@ -4,6 +4,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\RecreationController;
 use App\Models\Article;
+use App\Models\Recreation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,9 +34,9 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     Route::get('/articles', [ArticleController::class, 'index'])->name('article.index');
     Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
     Route::post('/articles', [ArticleController::class, 'store']);
-    Route::get('/articles/{article}/edit', [ArticleController::class, 'edit']);
-    Route::patch('/articles/{article}', [ArticleController::class, 'update']);
-    Route::delete('/articles/{article}', [ArticleController::class, 'destroy']);
+    Route::get('/articles/{article:slug}/edit', [ArticleController::class, 'edit']);
+    Route::patch('/articles/{article:slug}', [ArticleController::class, 'update']);
+    Route::delete('/articles/{article:slug}', [ArticleController::class, 'destroy']);
 
     /**route untuk kategori artikel */
     Route::post('/categories', [CategoryController::class, 'store']);
@@ -46,6 +47,7 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     /**route untuk rekreasi */
     Route::get('/recreations', [RecreationController::class, 'index'])->name('recreation.index');
     Route::get('/recreations/create', [RecreationController::class, 'create'])->name('recreation.create');
+    Route::post('/recreations', [Recreation::class, 'store'])->name('recreation.store');
 });
 
 
