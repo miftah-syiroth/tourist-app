@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\ArticleImage;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -39,25 +41,27 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         /** buat validasi untuk setiap input form */
-        $attribute = $request->validate([
+        $attributes = $request->validate([
             'title' => 'required|string',
-            'category' => 'required',
+            'categories' => 'required|array',
             'content' => 'required|string',
-            'images.*' => 'image',
-            'images.0' => 'required',
-            'images.1' => 'required',
-            'images.2' => 'required',
+            'images.0' => 'image|required',
+            'images.1' => 'image|required',
+            'images.2' => 'image|required',
         ]);
 
-
         /** buat index slug pada array attribut dari title */
-        $attribute['slug'] = Str::of($attribute['title'])->slug('-');
+        $attributes['slug'] = Str::of($attributes['title'])->slug('-');
 
-        /**input ke dalam database*/
-        $article = Auth::user()->articles()->create($attribute);
+        /**input ke dalam tabel artikel*/
+        $article = Auth::user()->articles()->create($attributes);
+
+        /**masukkan sebuah category default lalu insert dalam database */
+        array_push($attributes['categories'], '5');
+        $article->categories()->attach($attributes['categories']);
 
         /** simpan semua input gambar ke dalam storage dan ambil path ke dalam array images */
-        foreach ($attribute['images'] as $key => $image) {
+        foreach ($attributes['images'] as $key => $image) {
             $article->images()->create([
                 'image' => $image->store('images/article'),
             ]);
@@ -68,7 +72,6 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
-        return abort(403);
         /** id 5 itu default kategori untuk semua artikel, tidak dipilih/dihapus/diedit */
         $categories = Category::where('id', '!=', '5')->get();
 
@@ -80,39 +83,38 @@ class ArticleController extends Controller
 
     public function update(Request $request, Article $article)
     {
-        dump($request->images);
-        die;
-        exit;
-
         /** buat validasi untuk setiap input form */
-        $attribute = $request->validate([
+        /** VALIDASINYA MASIH ERROR, MASIH BISA LOLOS */
+        $attributes = $request->validate([
             'title' => 'required|string',
             'categories' => 'required',
-            'categories' => 'array|required',
             'content' => 'required|string',
-            'images.*' => 'image',
-            'images.0' => 'required',
-            'images.1' => 'required',
-            'images.2' => 'required',
+            'images' => 'image',
         ]);
 
         /** update aja dulu artikelnya */
-        $article->update($attribute);
+        $article->update($attributes);
 
-        /**sinkronisasi kategori sebelumnya dengan yg dipilih. id yang tidak ada dlm array akan dihapus */
-        $article->categories()->sync($attribute['categories']);
+        /**update categori, tp cek udu atributes ada key categories atau engga */
+        array_push($attributes['categories'], '5');
+        $article->categories()->sync($attributes['categories']);
 
-        /**hapus gambar terdahulu lalu input yg baru */
-        $images = $article->images;
-        foreach ($images as $key => $image) {
-            Storage::delete($image->image);
-        }
-        $article->images()->delete();
+        /**jika ada input gambar, maka kita hapus dulu gambar di storage lalu ubah 
+         * databasenya berdasarkan id_gambar pada koleksi
+         */
+        if (Arr::exists($attributes, 'images')) {
 
-        foreach ($attribute['images'] as $key => $image) {
-            $article->images()->create([
-                'image' => $image->store('images/article'),
-            ]);
+            foreach ($attributes['images'] as $key => $image) {
+
+                $row = ArticleImage::find($key);
+
+                /**hapus file di storage berdasarkan id baris gambar */
+                Storage::delete($row->image);
+
+                $row->update([
+                    'image' => $image->store('images/article'),
+                ]);
+            }
         }
 
         return redirect('/dashboard/articles');
@@ -125,6 +127,7 @@ class ArticleController extends Controller
     {
         /**1 */
         $images = $article->images;
+
         foreach ($images as $key => $image) {
             Storage::delete($image->image);
         }

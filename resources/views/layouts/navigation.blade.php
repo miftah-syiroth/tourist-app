@@ -35,10 +35,10 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('recreation.index')">
+                        <x-dropdown-link :href="route('recreations.index')">
                             {{ __('Index') }}
                         </x-dropdown-link>
-                        <x-dropdown-link :href="route('recreation.create')">
+                        <x-dropdown-link :href="route('recreations.create')">
                             {{ __('Tambah') }}
                         </x-dropdown-link>
                     </x-slot>
@@ -59,10 +59,10 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('article.index')">
+                        <x-dropdown-link :href="route('articles.index')">
                             {{ __('Index') }}
                         </x-dropdown-link>
-                        <x-dropdown-link :href="route('article.create')">
+                        <x-dropdown-link :href="route('articles.create')">
                             {{ __('Create') }}
                         </x-dropdown-link>
                     </x-slot>

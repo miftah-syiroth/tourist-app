@@ -21,9 +21,9 @@ class Article extends Model
     /**
      * relasi many to many dengan kategori. Banyak artikel memiliki banyak kategori
      */
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsToMany(Category::class, 'article_has_categories', 'article_id', 'category_id');
     }
 
     /**relasi banyak ke satu. Sebuah artikel hanyak dimiliki oleh satu user */

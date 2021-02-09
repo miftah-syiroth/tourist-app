@@ -14,7 +14,7 @@ class Recreation extends Model
         'name',
         'slug',
         'start_day',
-        'finins_day',
+        'finish_day',
         'price',
         'quote',
         'status'

@@ -31,8 +31,8 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     Route::view('/', 'dashboard')->name('dashboard');
 
     /** ini route untuk kelola artikel */
-    Route::get('/articles', [ArticleController::class, 'index'])->name('article.index');
-    Route::get('/articles/create', [ArticleController::class, 'create'])->name('article.create');
+    Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');
+    Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
     Route::post('/articles', [ArticleController::class, 'store']);
     Route::get('/articles/{article:slug}/edit', [ArticleController::class, 'edit']);
     Route::patch('/articles/{article:slug}', [ArticleController::class, 'update']);
@@ -40,14 +40,17 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
 
     /**route untuk kategori artikel */
     Route::post('/categories', [CategoryController::class, 'store']);
-    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
     Route::put('/categories/{category}', [CategoryController::class, 'update']);
     Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
 
     /**route untuk rekreasi */
-    Route::get('/recreations', [RecreationController::class, 'index'])->name('recreation.index');
-    Route::get('/recreations/create', [RecreationController::class, 'create'])->name('recreation.create');
-    Route::post('/recreations', [Recreation::class, 'store'])->name('recreation.store');
+    Route::get('/recreations', [RecreationController::class, 'index'])->name('recreations.index');
+    Route::get('/recreations/create', [RecreationController::class, 'create'])->name('recreations.create');
+    Route::post('/recreations', [RecreationController::class, 'store'])->name('recreations.store');
+    Route::get('/recreations/{recreation:slug}/edit', [RecreationController::class, 'edit'])->name('recreations.edit');
+    Route::patch('/recreations/{recreation:slug}', [RecreationController::class, 'update'])->name('recreations.update');
+    Route::delete('/recreations/{recreation:slug}', [RecreationController::class, 'destroy'])->name('recreations.destroy');
 });
 
 

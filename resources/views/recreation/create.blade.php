@@ -19,23 +19,32 @@
 
                                 <label class="block py-1">
                                     <span class="text-gray-700">Jam buka</span>
-                                    <input type="time" name="start_day" id="start_day">
+                                    <input type="time" value="{{ old('start_day') }}" name="start_day" id="start_day">
+                                    @error('start_day')
+                                    <div class="text-red-600 font-medium">{{ $message }}</div>
+                                    @enderror
                                 </label>
 
                                 <label class="block py-1">
                                     <span class="text-gray-700">jam tutup</span>
-                                    <input type="time" name="finish_day" id="finish_day">
+                                    <input type="time" value="{{ old('finish_day') }}" name="finish_day" id="finish_day">
+                                    @error('finish_day')
+                                    <div class="text-red-600 font-medium">{{ $message }}</div>
+                                    @enderror
                                 </label>
 
                                 <label class="block py-1">
                                     <span class="text-gray-700">harga dasar</span>
-                                    <input type="number" name="price" id="">
+                                    <input type="number" value="{{ old('price') }}" name="price" id="price">
+                                    @error('price')
+                                    <div class="text-red-600 font-medium">{{ $message }}</div>
+                                    @enderror
                                 </label>
 
                                 <label class="block py-1">
                                     <span class="text-gray-700">quote</span>
-                                    <textarea name="quote" id="content" cols="30" rows="10" class="@error('content') is-invalid @enderror form-textarea mt-1 block w-full"> {{ old('title') }}</textarea>
-                                    @error('content')
+                                    <textarea name="quote" id="quote" cols="30" rows="10" class="@error('quote') is-invalid @enderror form-textarea mt-1 block w-full"> {{ old('quote') }}</textarea>
+                                    @error('quote')
                                     <div class="text-red-600 font-medium">{{ $message }}</div>
                                     @enderror
                                 </label> 
@@ -44,7 +53,7 @@
                                     <div class="py-4">
                                         <label class="inline-flex">
                                             <span class="text-gray-700">Gambar 1</span>
-                                            <input type="file" name="images[]" id="image1" class="@error('images.0') is-invalid @enderror">
+                                            <input type="file" name="images[]" id="" class="@error('images.0') is-invalid @enderror">
                                             @error('images.0')
                                             <div class="text-red-600 font-medium">{{ $message }}</div>
                                             @enderror
@@ -54,8 +63,8 @@
                                     <div class="py-4">
                                         <label class="inline-flex">
                                             <span class="text-gray-700">Gambar 2</span>
-                                            <input type="file" name="images[]" id="image2" class="@error('images.1') is-invalid @enderror">
-                                            @error('images.0')
+                                            <input type="file" name="images[]" id="" class="@error('images.1') is-invalid @enderror">
+                                            @error('images.1')
                                             <div class="text-red-600 font-medium">{{ $message }}</div>
                                             @enderror
                                         </label>
@@ -64,18 +73,8 @@
                                     <div class="py-4">
                                         <label class="inline-flex">
                                             <span class="text-gray-700">Gambar 3</span>
-                                            <input type="file" name="images[]" id="image3" class="@error('images.2') is-invalid @enderror">
-                                            @error('images.0')
-                                            <div class="text-red-600 font-medium">{{ $message }}</div>
-                                            @enderror
-                                        </label>
-                                    </div>
-
-                                    <div class="py-4">
-                                        <label class="inline-flex">
-                                            <span class="text-gray-700">Gambar 4</span>
-                                            <input type="file" name="images[]" id="image4" class="@error('images.3') is-invalid @enderror">
-                                            @error('images.0')
+                                            <input type="file" name="images[]" id="" class="@error('images.2') is-invalid @enderror">
+                                            @error('images.2')
                                             <div class="text-red-600 font-medium">{{ $message }}</div>
                                             @enderror
                                         </label>

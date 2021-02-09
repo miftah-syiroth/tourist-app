@@ -21,9 +21,9 @@
                             </label>
                             <label class="block">
                                 <span class="text-gray-700">pilih kategori artikel</span>
-                                <select name="category" id="" class="@error('categories') is-invalid @enderror block w-full mt-1">
+                                <select multiple name="categories[]" id="" class="@error('categories') is-invalid @enderror block w-full mt-1">
                                     @foreach ($categories as $category)
-                                        <option {{ $category->id == $article->category_id ? 'selected' : '' }} value={{ $category->id }}>{{ $category->category }}</option>
+                                        <option value={{ $category->id }}>{{ $category->category }}</option>
                                     @endforeach 
                                 </select>
                                 @error('categories')
@@ -48,8 +48,8 @@
                                     </a>
                                     <label class="inline-flex">
                                         <span class="text-gray-700">Gambar {{$key+1}}</span>
-                                        <input type="file" name="images[]" id="image1" class="@error('images.0') is-invalid @enderror">
-                                        @error('images.0')
+                                        <input type="file" name="images[{{ $image->id }}]" id="images" class="@error('images') is-invalid @enderror">
+                                        @error('images')
                                         <div class="text-red-600 font-medium">{{ $message }}</div>
                                         @enderror
                                     </label>

@@ -20,8 +20,8 @@
                                 </label>
                                 <label class="block">
                                     <span class="text-gray-700">pilih kategori artikel</span>
-                                    <select name="category" id="" class="@error('categories') is-invalid @enderror block w-full mt-1">
-                                        <option disabled selected>Choose one!</option>
+                                    <select name="categories[]" id="" class="@error('categories') is-invalid @enderror form-multiselect block w-full mt-1" multiple>
+                                        <option disabled selected>Choose some category!</option>
                                         @foreach ($categories as $category)
                                             <option value={{ $category->id }}>{{ $category->category }}</option>
                                         @endforeach 
@@ -37,42 +37,37 @@
                                     <div class="text-red-600 font-medium">{{ $message }}</div>
                                     @enderror
                                 </label>
-                                <div class="mt-4">
-                                    <label class="inline-flex">
-                                        <span class="text-gray-700">Gambar 1</span>
-                                        <input type="file" name="images[]" id="image1" class="@error('images.0') is-invalid @enderror">
-                                        @error('images.0')
-                                        <div class="text-red-600 font-medium">{{ $message }}</div>
-                                        @enderror
-                                    </label>
-                                    <label class="inline-flex">
-                                        <span class="text-gray-700">Gambar 2</span>
-                                        <input type="file" name="images[]" id="image2" class="@error('images.1') is-invalid @enderror">
-                                        @error('images.1')
-                                        <div class="text-red-600 font-medium">{{ $message }}</div>
-                                        @enderror
-                                    </label>
-                                    <label class="inline-flex">
-                                        <span class="text-gray-700">Gambar 3</span>
-                                        <input type="file" name="images[]" id="image3" class="@error('images.2') is-invalid @enderror">
-                                        @error('images.2')
-                                        <div class="text-red-600 font-medium">{{ $message }}</div>
-                                        @enderror
-                                    </label>
-                                    <label class="inline-flex">
-                                        <span class="text-gray-700">Gambar 4</span>
-                                        <input type="file" name="images[]" id="image4" class="@error('images.3') is-invalid @enderror">
-                                        @error('images.3')
-                                        <div class="text-red-600 font-medium">{{ $message }}</div>
-                                        @enderror
-                                    </label>
-                                    <label class="inline-flex">
-                                        <span class="text-gray-700">Gambar 5</span>
-                                        <input type="file" name="images[]" id="image5" class="@error('images.4') is-invalid @enderror">
-                                        @error('images.4')
-                                        <div class="text-red-600 font-medium">{{ $message }}</div>
-                                        @enderror
-                                    </label>
+                                <div class="mt-4 flex flex-col">
+                                    <div class="py-1">
+                                        <label class="inline-flex">
+                                            <span class="text-gray-700">Gambar 1</span>
+                                            <input type="file" name="images[]" id="image1" class="@error('images.0') is-invalid @enderror">
+                                            @error('images.0')
+                                            <div class="text-red-600 font-medium">{{ $message }}</div>
+                                            @enderror
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="py-1">
+                                        <label class="inline-flex">
+                                            <span class="text-gray-700">Gambar 2</span>
+                                            <input type="file" name="images[]" id="image2" class="@error('images.1') is-invalid @enderror">
+                                            @error('images.1')
+                                            <div class="text-red-600 font-medium">{{ $message }}</div>
+                                            @enderror
+                                        </label>
+                                    </div>
+                                    
+
+                                    <div class="py-1">
+                                        <label class="inline-flex">
+                                            <span class="text-gray-700">Gambar 3</span>
+                                            <input type="file" name="images[]" id="image3" class="@error('images.2') is-invalid @enderror">
+                                            @error('images.2')
+                                            <div class="text-red-600 font-medium">{{ $message }}</div>
+                                            @enderror
+                                        </label>
+                                    </div>
                                 </div>
                                 
                                 
