@@ -1,1 +1,0 @@
-<h2>Fitur sedang dalam perbaikan</h2>

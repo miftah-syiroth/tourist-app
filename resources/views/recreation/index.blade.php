@@ -11,8 +11,7 @@
                                         <div>
                                             @foreach ($recreation->images as $image)
                                                 <a href="">
-                                                    <p>{{ $image->image }}</p>
-                                                    <img src="{{asset('/apapa.png')}}" alt="" class="object-contain h-48 w-full">
+                                                    <img src="{{ asset('/storage/' . $image->image) }}" alt="ini gambar yg ada di root public" class="object-contain h-48 w-full">
                                                 </a>
                                             @endforeach
                                         </div>

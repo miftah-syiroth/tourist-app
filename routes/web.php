@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\RecreationController;
 use App\Models\Article;
 use App\Models\Recreation;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,9 +20,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('frontpage.index');
 });
+
+Route::get('/home', [PageController::class, 'index']);
+Route::get('/recreations', [PageController::class, 'recreation']);
+Route::get('/events', [PageController::class, 'event']);
+Route::get('/facilities', [PageController::class, 'facility']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
