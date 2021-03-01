@@ -13,7 +13,7 @@ class RecreationController extends Controller
 {
     public function index()
     {
-        $recreations = Recreation::all();
+        $recreations = Recreation::orderByDesc('created_at')->get();
 
         return view('recreation.index', [
             'recreations' => $recreations,
@@ -34,9 +34,9 @@ class RecreationController extends Controller
             'finish_day' => 'required',
             'price' => 'required',
             'quote' => 'required',
-            'images.0' => 'required',
-            'images.1' => 'required',
-            'images.2' => 'required',
+            'images.0' => 'required|image',
+            'images.1' => 'required|image',
+            'images.2' => 'required|image',
         ]);
 
         /**rekreasi memiliki kolom slug dan status, sedangkan field input tidak ada. jd buat dulu */
@@ -104,6 +104,15 @@ class RecreationController extends Controller
         }
 
         $recreation->delete();
+
+        return redirect()->back();
+    }
+
+    public function setStatus(Recreation $recreation)
+    {
+        $recreation->update([
+            'status' => $recreation->status == true ? false : true,
+        ]);
 
         return redirect()->back();
     }

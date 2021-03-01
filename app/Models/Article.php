@@ -12,7 +12,6 @@ class Article extends Model
     protected $table = "articles";
     protected $fillable = [
         'user_id',
-        'category_id',
         'title',
         'slug',
         'content',

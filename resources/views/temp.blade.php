@@ -1,10 +1,3 @@
-$table->id();
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('title');
-            $table->string('slug');
-            $table->text('content');
-            $table->timestamps();
-        });
-
-        $table->foreignId('article_id')->constrained('articles')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')->onDelete('cascade');
+<x-layouts.dashboard>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis nobis quibusdam, architecto quis dolores excepturi rem in? Reprehenderit fuga, animi ratione alias quam tenetur nemo! Nesciunt quis error architecto saepe.</p>
+</x-layouts.dashboard>

@@ -41,33 +41,32 @@
             </li>
             <li class="flex items-center">
               <a class="lg:text-white font-serif lg:hover:text-gray-400 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-sm uppercase font-bold"
-                href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/landing">
+                href="/events">
                 Acara
-                </a
-              >
+              </a>
             </li>
             <li class="flex items-center">
               <a class="lg:text-white font-serif lg:hover:text-gray-400 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-sm uppercase font-bold"
-                href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/landing">
+                href="#">
                 Promo
                 </a
               >
             </li>
             <li class="flex items-center">
               <a class="lg:text-white font-serif lg:hover:text-gray-400 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-sm uppercase font-bold"
-                href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/landing">
+                href="#">
                 Fasilitas
                 </a
               >
             </li>
             <li class="flex items-center">
               <a class="lg:text-white font-serif lg:hover:text-gray-400 text-gray-800 px-3 py-4 lg:py-2 flex items-center text-sm uppercase font-bold"
-                href="https://www.creative-tim.com/learning-lab/tailwind-starter-kit#/landing">
+                href="#">
                 Artikel
                 </a
               >
             </li>
-            <li class="flex items-center">
+            {{-- <li class="flex items-center">
               @if (Route::has('login'))
                 
                   @auth
@@ -86,7 +85,7 @@
                   @endauth
             @endif
               
-            </li>
+            </li> --}}
           </ul>
         </div>
       </div>

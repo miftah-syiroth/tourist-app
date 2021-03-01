@@ -92,10 +92,10 @@ class ArticleController extends Controller
             'images' => 'image',
         ]);
 
-        /** update aja dulu artikelnya */
+        /** update aja dulu artikelnya, image dan kategori tidak termasuk fillable model */
         $article->update($attributes);
 
-        /**update categori, tp cek udu atributes ada key categories atau engga */
+        /**tambahkan category default id 5, sinkronisasi untuk tabel many to many */
         array_push($attributes['categories'], '5');
         $article->categories()->sync($attributes['categories']);
 

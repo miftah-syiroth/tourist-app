@@ -6,14 +6,15 @@ use Illuminate\View\Component;
 
 class FeatureCards extends Component
 {
+    public $recreations;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($recreations)
     {
-        //
+        $this->recreations = $recreations;
     }
 
     /**

@@ -20,8 +20,15 @@ class Recreation extends Model
         'status'
     ];
 
+    /**relasi one to many terhadap gambar rekreasi */
     public function images()
     {
         return $this->hasMany(RecreationImage::class, 'recreation_id');
+    }
+
+    /**relasi one to many terhadap event */
+    public function events()
+    {
+        return $this->hasMany(Event::class, 'recreation_id');
     }
 }
