@@ -1,7 +1,4 @@
 <x-layouts.frontpage>
-    {{-- hero section --}}
-    <x-frontpage.hero/>
-    {{-- end hero section --}}
     
     {{-- ini untuk card list fitur--}}
     <section class="pb-20 bg-gray-300">
