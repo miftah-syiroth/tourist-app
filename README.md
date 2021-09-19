@@ -1,4 +1,4 @@
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
+<a href="https://tourist-app.syiroth.com/">tourist-app.syiroth.com</a>
 
 ## About Tourits App
 
